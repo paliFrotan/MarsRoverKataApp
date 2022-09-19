@@ -16,7 +16,8 @@ namespace MarsRoverKataService
         public char RoverFacingDirection(char roverCommand)
         {
             if(roverCommand == 'L') 
-            { 
+            {
+                _position = 'W';
             };
             return _position;
         }
