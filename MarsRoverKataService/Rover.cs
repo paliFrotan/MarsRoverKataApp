@@ -9,11 +9,16 @@ namespace MarsRoverKataService
     public class Rover
     {
         public Rover()
-        { 
-        }
-        public char RoverFacingDirection(char initialposition)
         {
-            return 'N';
+        }
+        private char _position = 'N';
+        
+        public char RoverFacingDirection(char roverCommand)
+        {
+            if(roverCommand == 'L') 
+            { 
+            };
+            return _position;
         }
 
     }
