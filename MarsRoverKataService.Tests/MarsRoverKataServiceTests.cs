@@ -8,8 +8,8 @@ public class Tests
     }
 
     [Test]
-    public void Test1()
+    public void RoverShouldTurnLeft()
     {
-        Assert.Pass();
+        Assert.True(false);
     }
 }
