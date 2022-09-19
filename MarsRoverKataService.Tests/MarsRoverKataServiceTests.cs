@@ -17,5 +17,6 @@ public class Tests
     {
         char position = 'W';
         _rover.RoverFacingDirection('L').Should().Be(position);
+        _rover.RoverFacingDirection('R').Should().Be('E');
     }
 }
