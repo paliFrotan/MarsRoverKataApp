@@ -11,4 +11,19 @@
 //          roverCommand   =>   set  of LRM
 //   expected behaviours
 //  turnleft, turnright, moveForward
+using MarsRoverKataService;
+
 Console.WriteLine("Hello, World!");
+Controller input = new ();
+input.ControlSizePlateau(Console.ReadLine());
+
+string initialPositionInput = Console.ReadLine();
+
+string commandSetInput = Console.ReadLine();
+string initialPosition2Input = Console.ReadLine();
+
+string commandSet2Input = Console.ReadLine();
+
+
+
+

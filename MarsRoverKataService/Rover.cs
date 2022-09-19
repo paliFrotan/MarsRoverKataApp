@@ -19,6 +19,10 @@ namespace MarsRoverKataService
             {
                 _position = 'W';
             };
+            if (roverCommand == 'R')
+            {
+                _position = 'E';
+            };
             return _position;
         }
 
