@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,13 +10,10 @@ namespace MarsRoverKataService
     public class Rover
     {
         public Direction Orientation { get; set; }
-        public Coordinate Location;
-        //public Command Execute { get; set; }
+        public Coordinate Location { get; set; }
 
         public Rover()
         {
-           // Orientation = Direction;
-            Location = new Coordinate();
         }
         public void RoverSettings(string initialpositionAndDirection)
         {
@@ -39,76 +37,68 @@ namespace MarsRoverKataService
             {
                 Orientation = Direction.W; 
             }
-            //Location = new Coordinate() { X = int.Parse(Settings[0]), Y = int.Parse(Settings[1]) };
-            Location.X = int.Parse(Settings[0]);
-            Location.Y = int.Parse(Settings[1]);
+            Location = new Coordinate() { X = int.Parse(Settings[0]), Y = int.Parse(Settings[1]) };
         }
 
-        
-        
-
-        public Coordinate MoveForward(Rover rover)
+        public Coordinate MoveForward()
         {
-           /* if (Orientation == Direction.N)
+            if (Orientation == Direction.N)
             {
-                Location = Location.AdjustYBy(rover, 1);
+                Location = Location.AdjustYBy(1);
             }
             if (Orientation == Direction.S)
             {
-                Location = Location.AdjustYBy(rover, -1);
-            }*/
-            if (rover.Orientation == Direction.E)
-            {
-               Location.X = rover.Location.X + 1;
-               Location.Y = rover.Location.Y;
-               Orientation = rover.Orientation;
-                //Location = Location.AdjustXBy(rover, 1);
+                Location = Location.AdjustYBy(-1);
             }
-           /* if (Orientation == Direction.W)
+            if (Orientation == Direction.E)
             {
-                Location = Location.AdjustXBy(rover,-1);
-            }*/
+               Location = Location.AdjustXBy(1);
+            }
+            if (Orientation == Direction.W)
+            {
+                Location = Location.AdjustXBy(-1);
+            }
             return Location;
         }
-        public Direction TurnLeft(Rover rover)
+        public Direction TurnLeft()
         {
-            if (rover.Orientation == Direction.N)
+            if (Orientation == Direction.N)
             {
-                rover.Orientation = Direction.W;
+                Orientation = Direction.W;
             }
-            else if (rover.Orientation == Direction.W)
+            else if (Orientation == Direction.W)
             {
-                rover.Orientation = Direction.S;
+                Orientation = Direction.S;
             }
-            else if (rover.Orientation == Direction.S)
+            else if (Orientation == Direction.S)
             {
-                rover.Orientation = Direction.E;
+                Orientation = Direction.E;
             }
-            else if (rover.Orientation == Direction.E)
+            else if (Orientation == Direction.E)
             {
-                rover.Orientation = Direction.N;
+                Orientation = Direction.N;
             }
-            return rover.Orientation;
+            return Orientation;
         }
-        public Direction TurnRight(Rover rover)
+        public Direction TurnRight()
         {
-            if (rover.Orientation == Direction.N)
+            if (Orientation == Direction.N)
             {
-                rover.Orientation = Direction.E;
+                Orientation = Direction.E;
             }
-            else if (rover.Orientation == Direction.E)
+            else if (Orientation == Direction.E)
             {
-                rover.Orientation = Direction.S;
+                Orientation = Direction.S;
             }
-            else if (rover.Orientation == Direction.S)
+            else if (Orientation == Direction.S)
             {
-                rover.Orientation = Direction.W;
+                Orientation = Direction.W;
             }
-            else if (rover.Orientation == Direction.W)
+            else if (Orientation == Direction.W)
             {
-                rover.Orientation = Direction.N;
+                Orientation = Direction.N;
             }
-            return rover.Orientation;
+            return Orientation;
         }
     }
 }

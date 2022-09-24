@@ -16,12 +16,12 @@ using MarsRoverKataService;
 Console.WriteLine("Welcome to Mars Mission, please provide inputs!");
 var inputPlateauSettings = new Plateau();
 inputPlateauSettings.PlateauSettings(Console.ReadLine());
-var inputRoverSettings = new Rover();
-inputRoverSettings.RoverSettings(Console.ReadLine());
+var _rover = new Rover();
+_rover.RoverSettings(Console.ReadLine());
 var control = new Controller();
 control.SetCommands(Console.ReadLine());
 
-var result = control.Execute(inputPlateauSettings, inputRoverSettings);
+var result = control.Execute(_rover);
 Console.WriteLine(result);
 
 //var initialRoverPosition2 = new Rover();

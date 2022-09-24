@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 
 namespace MarsRoverKataService
 {
-    public class Coordinate
+    public struct Coordinate
     {
         public int X { get; set; }
         public int Y { get; set; }
       
-       /* public Coordinate AdjustXBy(Rover rover, int adjustment)
+        public Coordinate AdjustXBy(int adjustment)
         {
-            int oldX = rover.Location.X;
-
-            return new Coordinate { X = oldX + adjustment, Y = Y };
+            return new Coordinate { X = X + adjustment, Y = Y };
             
         }
-        public Coordinate AdjustYBy(Rover rover, int adjustment)
+        public Coordinate AdjustYBy(int adjustment)
         {
-            int oldY = rover.Location.Y;
-            return new Coordinate { X = X, Y = oldY + adjustment };
-        }*/
+            return new Coordinate { X = X, Y = Y + adjustment };
+        }
     } 
     
 }
-

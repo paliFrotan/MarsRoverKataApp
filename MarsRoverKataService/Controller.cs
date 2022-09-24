@@ -13,9 +13,10 @@ namespace MarsRoverKataService
     {
         
         public Controller() 
-        { 
+        {
         }
-        public List<Command> CommandList = new List<Command>();
+         
+        public List<Command> CommandList = new ();
         public void SetCommands(string Commands)
         {
             char[] commands = Commands.ToCharArray();
@@ -31,11 +32,8 @@ namespace MarsRoverKataService
 
 
         }
-        public string Execute(Plateau plateau, Rover rover)
+        public string Execute(Rover _rover1)
         {
-
-            var _rover = new Rover();
-            
             var _finalOrientation = new Direction();
             var _finalLocation = new Coordinate();
             string result = string.Empty;
@@ -43,17 +41,19 @@ namespace MarsRoverKataService
             {
                 if (CommandList[i] == Command.M)
                 {
-                    _finalLocation = _rover.MoveForward(rover);
-                    _finalOrientation = _rover.Orientation;
+                    _finalLocation = _rover1.MoveForward();
+                    _finalOrientation = _rover1.Orientation;
 
                 }
                 if (CommandList[i] == Command.L)
                 {
-                    _finalOrientation = _rover.TurnLeft(rover);
+                    _finalOrientation = _rover1.TurnLeft();
+                    _finalLocation = _rover1.Location;
                 }
                 if (CommandList[i] == Command.R)
                 {
-                    _finalOrientation = _rover.TurnRight(rover);
+                    _finalOrientation = _rover1.TurnRight();
+                    _finalLocation = _rover1.Location;
                 }
 
             }

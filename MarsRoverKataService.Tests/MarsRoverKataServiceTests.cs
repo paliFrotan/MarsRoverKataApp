@@ -15,7 +15,7 @@ public class Tests
         _sizePlateau = new Plateau();
         _commands = new Controller();
     }
-    /*[Test]
+    [Test]
     public void RoverFacesNorthinitially()
     {
         var _orientation = Direction.N;
@@ -32,15 +32,15 @@ public class Tests
     [Test]
     public void RoverMoveFacingNorthThenYIncreasesByOne()
     {
-        /*
+        
         _rover.MoveForward();
 
         var expectedLocation = new Coordinate { X = 0, Y = 1 };
         expectedLocation.Should().Be(_rover.Location);
         var _orientation = Direction.N;
         _orientation.Should().Be(_rover.Orientation);
-        */
-    /*}
+        
+    }
     [Test]
     public void RoverFacingSouthThenYDecreasesByOne()
     {
@@ -129,7 +129,7 @@ public class Tests
 
         Assert.AreEqual(initialLocation, rover.Location);
         Assert.AreEqual(Direction.N, rover.Orientation);
-    }*/
+    }
     [Test]
     public void InputReturnsSizeOfPlateau()
     {
@@ -148,34 +148,21 @@ public class Tests
         _sizePlateau.PlateauSettings("5 5");
         _sizePlateau.IsCoordinateWithin(_location).Should().Be(true);
     }
-    /*[Test]
-    public void RoverCommandsSet()
-    {
-        _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E");
-        _commands.SetCommands("MLMR");
-        _commands.Execute(_sizePlateau,_rover).Should().Be("4 4 E");
-    }*/
     [Test]
     public void RoverCommandsSet()
     {
         _sizePlateau.PlateauSettings("5 5");
         _rover.RoverSettings("3 3 E");
-        _commands.SetCommands("L");
-        _commands.Execute(_sizePlateau, _rover).Should().Be("3 3 N");
+        _commands.SetCommands("MLMR");
+        _commands.Execute(_rover).Should().Be("4 4 E");
     }
-    /*
+    [Test]
+    public void RoverCommandsSetRoverLeft()
+    {
+        _sizePlateau.PlateauSettings("5 5");
+        _rover.RoverSettings("3 3 E");
+        _commands.SetCommands("L");
+        _commands.Execute(_rover).Should().Be("3 3 N");
+    }
     
-    
-  [TestCase(Direction.East, Direction.North, TestName = "AndFacingEastThenTheRoverFacesNorth")]
-  public void RoverTurningLeft(Direction start, Direction expected)
-  {
-    var rover = new Rover { Orientation = start };
-    var initialLocation = rover.Location;
-
-    rover.TurnLeft();
-
-    Assert.AreEqual(expected, rover.Orientation);
-    Assert.AreEqual(initialLocation, rover.Location);
-  }*/
 }
