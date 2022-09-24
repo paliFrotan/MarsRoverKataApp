@@ -5,7 +5,7 @@
 //  Plateau: Grid of positions (x,y, Z)
 //  FIrst Message: gridsize   MaxCoordinates maxx, maxy
 //  CommandMessage: String of Chars L R M where L= left R=Right M=Move
-//  1. Plateau SIze(5 5)
+//  1. Plateau SIze(5 5)   ---------------------->
 //  2. Array RoverInstructions Objects where  2lines
 //          roverinstruction => roverPostion
 //          roverCommand   =>   set  of LRM
@@ -13,16 +13,22 @@
 //  turnleft, turnright, moveForward
 using MarsRoverKataService;
 
-Console.WriteLine("Hello, World!");
-Controller input = new ();
-input.ControlSizePlateau(Console.ReadLine());
+Console.WriteLine("Welcome to Mars Mission, please provide inputs!");
+var inputPlateauSettings = new Plateau();
+inputPlateauSettings.PlateauSettings(Console.ReadLine());
+var inputRoverSettings = new Rover();
+inputRoverSettings.RoverSettings(Console.ReadLine());
+var control = new Controller();
+control.SetCommands(Console.ReadLine());
 
-string initialPositionInput = Console.ReadLine();
+var result = control.Execute(inputPlateauSettings, inputRoverSettings);
+Console.WriteLine(result);
 
-string commandSetInput = Console.ReadLine();
-string initialPosition2Input = Console.ReadLine();
+//var initialRoverPosition2 = new Rover();
+//initialRoverPosition2.RoverSettings(Console.ReadLine());
 
-string commandSet2Input = Console.ReadLine();
+//var commands2 = new Controller();
+//commands.SetCommands(Console.ReadLine());
 
 
 

@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace MarsRoverKataService
 {
-    public class Command
+    public enum Command
     {
-        public  Command()
-        {
-             
-        }
-        public char CommandSingle()
-        {
-            return ' ';
-        }
+        M, L, R
     }
 }
