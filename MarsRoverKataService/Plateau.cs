@@ -30,5 +30,9 @@ namespace MarsRoverKataService
             return (x < MaxX && x > -1 && y < MaxY && y > -1);
             
         }
+        public int MaxRoversAllowed()
+        {
+            return (int.Parse((MaxX * MaxY / 2 ).ToString()));
+        }
     }
 }
