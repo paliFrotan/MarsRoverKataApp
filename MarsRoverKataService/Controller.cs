@@ -41,7 +41,6 @@ namespace MarsRoverKataService
         {
             var _finalOrientation = new Direction();
             var _finalLocation = new Coordinate();
-            var _possibleMove = new Coordinate();
             var _collisions = new Collisions();
             string message = "Successfully moved";
             string messageCollision = "Successfully moved";
@@ -50,7 +49,7 @@ namespace MarsRoverKataService
             {
                 if (CommandList[i] == Command.M)
                 {
-                    _possibleMove = _rover1.MoveForward();
+                    var _possibleMove = _rover1.MoveForward();
                        
                     messageCollision =_collisions.CollisionsCheck(_possibleMove,CollisionPoints,RoverNames);
                     if (message != messageCollision)
@@ -87,9 +86,7 @@ namespace MarsRoverKataService
             else 
             {
                 return messageCollision;
-             }
+            }
         }
-
-        
     }
 }

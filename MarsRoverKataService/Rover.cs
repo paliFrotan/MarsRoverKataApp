@@ -12,8 +12,8 @@ namespace MarsRoverKataService
         public Direction Orientation { get; set; }
         public Coordinate Location { get; set; }
         public string RoverName { get; set; }
-        public int RoverId { get; set; }
-        public Rover()
+        
+        public Rover(int RoverId)
         {
             // default position
             RoverName = "Rover" + RoverId;

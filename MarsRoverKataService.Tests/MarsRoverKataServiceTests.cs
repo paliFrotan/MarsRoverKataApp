@@ -11,7 +11,7 @@ public class Tests
     [SetUp]
     public void Setup()
     {
-        _rover  = new Rover();
+        _rover  = new Rover(0);
         _sizePlateau = new Plateau();
         _commands = new Controller();
     }
@@ -20,7 +20,6 @@ public class Tests
     {
         var _orientation = Direction.N;
         _orientation.Should().Be(_rover.Orientation);
-        
     }
 
     [Test]
@@ -29,106 +28,113 @@ public class Tests
         var expectedLocation = new Coordinate { X=0, Y=0 };
         expectedLocation.Should().Be(_rover.Location);
     }
+
     [Test]
     public void RoverMoveFacingNorthThenYIncreasesByOne()
     {
-        
         _rover.MoveForward();
-
         var expectedLocation = new Coordinate { X = 0, Y = 1 };
         expectedLocation.Should().Be(_rover.Location);
         var _orientation = Direction.N;
         _orientation.Should().Be(_rover.Orientation);
         
     }
+
     [Test]
     public void RoverFacingSouthThenYDecreasesByOne()
     {
         // Arrange
-        var rover = new Rover { Orientation = Direction.S };
-        var initialLocation = rover.Location; // capturing the inital location
+        _rover.Orientation = Direction.S;
+        var initialLocation = _rover.Location; // capturing the inital location
 
         // Act
-        rover.MoveForward();
+        _rover.MoveForward();
 
         // Assert
         var expectedLocation = new Coordinate { X = initialLocation.X, Y = initialLocation.Y - 1 };
-        Assert.AreEqual(expectedLocation, rover.Location);
-        Assert.AreEqual(Direction.S, rover.Orientation);
+        expectedLocation.Should().Be( _rover.Location);
+        _rover.Orientation.Should().Be(Direction.S);
+         
     }
+
     [Test]
     public void RoverFacingEastThenXIncreasesByOne()
     {
         // Arrange
-        var rover = new Rover { Orientation = Direction.E };
-        var initialLocation = rover.Location;
+        _rover.Orientation = Direction.E;
+        var initialLocation = _rover.Location;
 
         // Act
-        rover.MoveForward();
+        _rover.MoveForward();
 
         // Assert
         var expectedLocation = new Coordinate { X = initialLocation.X + 1, Y = initialLocation.Y };
-        Assert.AreEqual(expectedLocation, rover.Location);
-        Assert.AreEqual(Direction.E, rover.Orientation);
+
+        expectedLocation.Should().Be(_rover.Location);
+
+        _rover.Orientation.Should().Be(Direction.E);
     }
+
     [Test]
     public void RoverFacingWestThenXDecreasesByOne()
     {
         // Arrange
-        var rover = new Rover { Orientation = Direction.W };
-        var initialLocation = rover.Location;
+        _rover.Orientation = Direction.W;
+        var initialLocation = _rover.Location;
 
         // Act
-        rover.MoveForward();
+        _rover.MoveForward();
 
         // Assert
         var expectedLocation = new Coordinate { X = initialLocation.X - 1, Y = initialLocation.Y };
-        Assert.AreEqual(expectedLocation, rover.Location);
-        Assert.AreEqual(Direction.W, rover.Orientation);
+        expectedLocation.Should().Be(_rover.Location);
+        _rover.Orientation.Should().Be(Direction.W);
     }
+
     [Test]
     public void RoverFacingNorthThenTheRoverFacesWest()
     {
-        var rover = new Rover { Orientation = Direction.N };
-        var initialLocation = rover.Location;
+        _rover.Orientation = Direction.N;
+        var initialLocation = _rover.Location;
 
-        rover.TurnLeft();
+        _rover.TurnLeft();
 
-        Assert.AreEqual(initialLocation, rover.Location);
-        Assert.AreEqual(Direction.W, rover.Orientation);
+        initialLocation.Should().Be(_rover.Location);
+        _rover.Orientation.Should().Be(Direction.W);
     }
     [Test]
     public void RoverFacingWestThenTheRoverFacesSouth()
     {
-        var rover = new Rover { Orientation = Direction.W };
-        var initialLocation = rover.Location;
+        _rover.Orientation = Direction.W;
+        var initialLocation = _rover.Location;
 
-        rover.TurnLeft();
+        _rover.TurnLeft();
 
-        Assert.AreEqual(initialLocation, rover.Location);
-        Assert.AreEqual(Direction.S, rover.Orientation);
+        initialLocation.Should().Be(_rover.Location);
+        _rover.Orientation.Should().Be(Direction.S);
     }
     [Test]
     public void RoverFacingSouthThenTheRoverFacesEast()
     {
-        var rover = new Rover { Orientation = Direction.S };
-        var initialLocation = rover.Location;
+        _rover.Orientation = Direction.S;
+        var initialLocation = _rover.Location;
 
-        rover.TurnLeft();
+        _rover.TurnLeft();
 
-        Assert.AreEqual(initialLocation, rover.Location);
-        Assert.AreEqual(Direction.E, rover.Orientation);
+        initialLocation.Should().Be(_rover.Location);
+        _rover.Orientation.Should().Be(Direction.E);
     }
+
     [Test]
     public void RoverFacingEastThenTheRoverFacesNorth()
     {
-        var rover = new Rover { Orientation = Direction.E };
-        var initialLocation = rover.Location;
+        _rover.Orientation = Direction.E;
+        var initialLocation = _rover.Location;
 
-        rover.TurnLeft();
+        _rover.TurnLeft();
 
-        Assert.AreEqual(initialLocation, rover.Location);
-        Assert.AreEqual(Direction.N, rover.Orientation);
+        initialLocation.Should().Be(_rover.Location);
+        _rover.Orientation.Should().Be(Direction.N);
     }
     [Test]
     public void InputReturnsSizeOfPlateau()
@@ -164,5 +170,48 @@ public class Tests
         _commands.SetCommands("L");
         _commands.Execute(_rover).Should().Be("3 3 N");
     }
-    
+    [Test]
+    public void RoverCommandsCollision()
+    {
+        var _rover2 = new Rover(1);
+        _sizePlateau.PlateauSettings("5 5");
+        _rover.RoverSettings("3 3 E");
+        _commands.SetCommands("MLMR");
+        _commands.Execute(_rover).Should().Be("4 4 E");
+        _rover2.RoverSettings("3 3 E");
+        _commands.SetCommands("MLMR");
+        _commands.Execute(_rover2).Should().Be("Move aborted for Rover0");
+    }
+    [Test]
+    public void RoverCommandsNoCollision()
+    {
+        var _rover2 = new Rover(1);
+        var _rover3 = new Rover(2);
+        _sizePlateau.PlateauSettings("5 5");
+        _rover.RoverSettings("3 3 E");
+        _commands.SetCommands("MLMR");
+        _commands.Execute(_rover).Should().Be("4 4 E");
+        _rover2.RoverSettings("4 3 E");
+        _commands.SetCommands("MLMR");
+        _commands.Execute(_rover2).Should().Be("6 5 E");
+        _rover3.RoverSettings("0 0 E");
+        _commands.SetCommands("MLMR");
+        _commands.Execute(_rover3).Should().Be("1 1 E");
+    }
+    [Test]
+    public void RoverCommandsCollisionAndContinue()
+    {
+        var _rover2 = new Rover(1);
+        var _rover3 = new Rover(2);
+        _sizePlateau.PlateauSettings("5 5");
+        _rover.RoverSettings("3 3 E");
+        _commands.SetCommands("MLMR");
+        _commands.Execute(_rover).Should().Be("4 4 E");
+        _rover2.RoverSettings("3 3 E");
+        _commands.SetCommands("MLMR");
+        _commands.Execute(_rover2).Should().Be("Move aborted for Rover0");
+        _rover3.RoverSettings("0 0 E");
+        _commands.SetCommands("MLMR");
+        _commands.Execute(_rover3).Should().Be("1 1 E");
+    }
 }

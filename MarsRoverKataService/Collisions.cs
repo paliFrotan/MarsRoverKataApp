@@ -7,26 +7,20 @@ using System.Threading.Tasks;
 
 namespace MarsRoverKataService
 {
-    public class Collisions
+    public struct Collisions
     {
-        
-
         public string CollisionsCheck(Coordinate possibleMove, List<Coordinate> CollisionPoints, List<string> RoverNames)
         {
-            //string[] Settings = possibleMove.Split(" ");
-            int NewLocationX = possibleMove.X;
-            int NewLocationY = possibleMove.Y;
             int count = 0;
-            
             foreach (Coordinate CollisionPossible in CollisionPoints)
             {
-                if (CollisionPossible.X == NewLocationX && CollisionPossible.Y == NewLocationY)
+                if (CollisionPossible.X == possibleMove.X && CollisionPossible.Y == possibleMove.Y)
                 {
-                    return ("Move aborted for " + RoverNames[count]);
+                    return "Move aborted for " + RoverNames[count];
                 }
                 count++;
             }
-            return ("Successfully moved");
+            return "Successfully moved";
         }
     }
 }
