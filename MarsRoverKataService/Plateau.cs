@@ -12,7 +12,7 @@ namespace MarsRoverKataService
     {
         public int MaxX { get; set; }
         public int MaxY { get; set; }
-        private List<int> sizePlateau = new List<int>();
+        private List<int> sizePlateau = new ();
 
         public Plateau() { }
         public void PlateauSettings(string PlateauSizeInput) 
@@ -34,5 +34,6 @@ namespace MarsRoverKataService
         {
             return (int.Parse((MaxX * MaxY / 2 ).ToString()));
         }
+
     }
 }

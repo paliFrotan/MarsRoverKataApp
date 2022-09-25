@@ -14,19 +14,26 @@
 using MarsRoverKataService;
 
 Console.WriteLine("Welcome to Mars Mission, please provide inputs!");
+Console.WriteLine("Enter when completed all Rover Commands");
+List<string> listResults = new List<string>();
 var inputPlateauSettings = new Plateau();
 inputPlateauSettings.PlateauSettings(Console.ReadLine());
 for (int i = 0; i <= inputPlateauSettings.MaxRoversAllowed(); i++)
 {
     var _rover = new Rover();
-    _rover.RoverSettings(Console.ReadLine());
-    var control = new Controller();
-    control.SetCommands(Console.ReadLine());
-
-    var result = control.Execute(_rover);
-    Console.WriteLine(result);
+    _rover.RoverId = i;
+    var input = Console.ReadLine();
+    
+    if (input == "") { break; }
+    
+    var _control = new Controller();
+    _rover.RoverSettings(input);
+    _control.SetCommands(Console.ReadLine());
+    
+    listResults.Add(_control.Execute(_rover));
 }
-
+foreach(string output in listResults)
+    Console.WriteLine(output);
 
 
 

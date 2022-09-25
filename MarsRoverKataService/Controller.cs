@@ -14,6 +14,7 @@ namespace MarsRoverKataService
         
         public Controller() 
         {
+           
         }
          
         public List<Command> CommandList = new ();
@@ -32,16 +33,31 @@ namespace MarsRoverKataService
 
 
         }
+
+        public List<Coordinate> CollisionPoints = new();
+        public List<string> RoverNames = new();
+
         public string Execute(Rover _rover1)
         {
             var _finalOrientation = new Direction();
             var _finalLocation = new Coordinate();
+            var _possibleMove = new Coordinate();
+            var _collisions = new Collisions();
+            string message = "Successfully moved";
+            string messageCollision = "Successfully moved";
             string result = string.Empty;
             for (int i = 0; i < CommandList.Count; i++)
             {
                 if (CommandList[i] == Command.M)
                 {
-                    _finalLocation = _rover1.MoveForward();
+                    _possibleMove = _rover1.MoveForward();
+                       
+                    messageCollision =_collisions.CollisionsCheck(_possibleMove,CollisionPoints,RoverNames);
+                    if (message != messageCollision)
+                    {
+                        break;
+                    }
+                    _finalLocation = _possibleMove;
                     _finalOrientation = _rover1.Orientation;
 
                 }
@@ -57,13 +73,23 @@ namespace MarsRoverKataService
                 }
 
             }
-            result += _finalLocation.X.ToString();
-            result += " ";
-            result += _finalLocation.Y.ToString();
-            result += " ";
-            result += _finalOrientation.ToString();
-            return result;
+            if (message == messageCollision)
+            {
+                CollisionPoints.Add(_finalLocation);
+                RoverNames.Add(_rover1.RoverName);
+                result += _finalLocation.X.ToString();
+                result += " ";
+                result += _finalLocation.Y.ToString();
+                result += " ";
+                result += _finalOrientation.ToString();
+                return result;
+            }
+            else 
+            {
+                return messageCollision;
+             }
         }
 
+        
     }
 }

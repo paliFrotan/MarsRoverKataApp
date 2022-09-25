@@ -11,11 +11,16 @@ namespace MarsRoverKataService
     {
         public Direction Orientation { get; set; }
         public Coordinate Location { get; set; }
-
+        public string RoverName { get; set; }
+        public int RoverId { get; set; }
         public Rover()
         {
+            // default position
+            RoverName = "Rover" + RoverId;
+            Orientation = Direction.N;
+            Location = new Coordinate() { X = 0, Y = 0 };
         }
-        public void RoverSettings(string initialpositionAndDirection)
+        public string RoverSettings(string initialpositionAndDirection)
         {
             string[] Settings = initialpositionAndDirection.Split(" ");
             if (initialpositionAndDirection.Length == 0) 
@@ -37,7 +42,9 @@ namespace MarsRoverKataService
             {
                 Orientation = Direction.W; 
             }
-            Location = new Coordinate() { X = int.Parse(Settings[0]), Y = int.Parse(Settings[1]) };
+            var _possibleLocation = new Coordinate() { X = int.Parse(Settings[0]), Y = int.Parse(Settings[1]) };
+            Location = _possibleLocation;
+            return "C";
         }
 
         public Coordinate MoveForward()
