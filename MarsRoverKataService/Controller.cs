@@ -31,8 +31,6 @@ namespace MarsRoverKataService
                 if (character == 'M')
                     CommandList.Add(Command.M);
             }
-
-
         }
 
         public List<Coordinate> CollisionPoints = new();
@@ -86,7 +84,7 @@ namespace MarsRoverKataService
             }
             else 
             {
-                return messageCollision;
+                return messageCollision+" @("+_finalLocation.X+","+_finalLocation.Y+"), Facing Direction "+_finalOrientation;
             }
         }
     }

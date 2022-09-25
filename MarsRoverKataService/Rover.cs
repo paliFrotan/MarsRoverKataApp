@@ -16,7 +16,7 @@ namespace MarsRoverKataService
         public Rover(int RoverId)
         {
             // default position
-            RoverName = "Rover" + RoverId;
+            RoverName = "RoverModel" + RoverId;
             Orientation = Direction.N;
             Location = new Coordinate() { X = 0, Y = 0 };
         }
@@ -42,8 +42,7 @@ namespace MarsRoverKataService
             {
                 Orientation = Direction.W; 
             }
-            var _possibleLocation = new Coordinate() { X = int.Parse(Settings[0]), Y = int.Parse(Settings[1]) };
-            Location = _possibleLocation;
+            Location = new Coordinate() { X = int.Parse(Settings[0]), Y = int.Parse(Settings[1]) };
             return "C";
         }
 

@@ -180,7 +180,7 @@ public class Tests
         _commands.Execute(_rover).Should().Be("4 4 E");
         _rover1.RoverSettings("3 3 E");
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover1).Should().Be("Move aborted for Rover1");
+        _commands.Execute(_rover1).Should().Be("Move aborted for RoverModel1 @(4,3), Facing Direction N");
     }
     [Test]
     public void RoverCommandsNoCollision()
@@ -201,17 +201,17 @@ public class Tests
     [Test]
     public void RoverCommandsCollisionAndContinue()
     {
-        var _rover2 = new Rover(1);
-        var _rover3 = new Rover(2);
+        var _rover1 = new Rover(1);
+        var _rover2 = new Rover(2);
         _sizePlateau.PlateauSettings("5 5");
         _rover.RoverSettings("3 3 E");
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover).Should().Be("4 4 E");
-        _rover2.RoverSettings("3 3 E");
+        _rover1.RoverSettings("3 3 E");
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover2).Should().Be("Move aborted for Rover1");
-        _rover3.RoverSettings("0 0 E");
+        _commands.Execute(_rover1).Should().Be("Move aborted for RoverModel1 @(4,3), Facing Direction N");
+        _rover2.RoverSettings("0 0 E");
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover3).Should().Be("1 1 E");
+        _commands.Execute(_rover2).Should().Be("1 1 E");
     }
 }

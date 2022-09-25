@@ -17,19 +17,19 @@ Console.WriteLine("Welcome to Mars Mission, please provide inputs!");
 Console.WriteLine("Press Enter when completed all Rover Commands");
 List<string> listResults = new List<string>();
 var inputPlateauSettings = new Plateau();
+var _control = new Controller();
 inputPlateauSettings.PlateauSettings(Console.ReadLine());
 for (int i = 0; i <= inputPlateauSettings.MaxRoversAllowed(); i++)
 {
-    var _rover = new Rover(i);
+    var _rover = new Rover(i+1);
     
     var input = Console.ReadLine();
     
     if (input == "") { break; }
     
-    var _control = new Controller();
+    
     _rover.RoverSettings(input);
     _control.SetCommands(Console.ReadLine());
-    
     listResults.Add(_control.Execute(_rover));
 }
 foreach(string output in listResults)
