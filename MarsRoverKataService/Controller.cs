@@ -20,6 +20,7 @@ namespace MarsRoverKataService
         public List<Command> CommandList = new ();
         public void SetCommands(string Commands)
         {
+            CommandList.Clear ();
             char[] commands = Commands.ToCharArray();
             foreach (char character in commands)
             {
@@ -51,7 +52,7 @@ namespace MarsRoverKataService
                 {
                     var _possibleMove = _rover1.MoveForward();
                        
-                    messageCollision =_collisions.CollisionsCheck(_possibleMove,CollisionPoints,RoverNames);
+                    messageCollision =_collisions.CollisionsCheck(_possibleMove,CollisionPoints,RoverNames,_rover1);
                     if (message != messageCollision)
                     {
                         break;
@@ -72,10 +73,10 @@ namespace MarsRoverKataService
                 }
 
             }
+            CollisionPoints.Add(_finalLocation);
+            RoverNames.Add(_rover1.RoverName);
             if (message == messageCollision)
             {
-                CollisionPoints.Add(_finalLocation);
-                RoverNames.Add(_rover1.RoverName);
                 result += _finalLocation.X.ToString();
                 result += " ";
                 result += _finalLocation.Y.ToString();

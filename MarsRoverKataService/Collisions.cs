@@ -9,16 +9,14 @@ namespace MarsRoverKataService
 {
     public struct Collisions
     {
-        public string CollisionsCheck(Coordinate possibleMove, List<Coordinate> CollisionPoints, List<string> RoverNames)
+        public string CollisionsCheck(Coordinate possibleMove, List<Coordinate> CollisionPoints, List<string> RoverNames, Rover rover)
         {
-            int count = 0;
             foreach (Coordinate CollisionPossible in CollisionPoints)
             {
                 if (CollisionPossible.X == possibleMove.X && CollisionPossible.Y == possibleMove.Y)
                 {
-                    return "Move aborted for " + RoverNames[count];
+                    return "Move aborted for " + rover.RoverName;
                 }
-                count++;
             }
             return "Successfully moved";
         }
