@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MarsRoverKataService
 {
-    public struct Collisions
+    public class Collisions
     {
         public string CollisionsCheck(Coordinate possibleMove, List<Coordinate> CollisionPoints, List<string> RoverNames, Rover rover)
         {
