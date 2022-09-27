@@ -19,25 +19,41 @@ List<string> listResults = new List<string>();
 var inputPlateauSettings = new Plateau();
 var _control = new Controller();
 
-inputPlateauSettings.PlateauSettings(Console.ReadLine());
-for (int i = 0; i <= inputPlateauSettings.MaxRoversAllowed(); i++)
-{
-    var _rover = new Rover(i+1);
-    
-    var input = Console.ReadLine();
-    
-    if (input == "") { break; }
-    
-    string message =_rover.RoverSettings(input,inputPlateauSettings);
-    //if (message == "Settings Applied Successfully") 
-    //{
-    _control.SetCommands(Console.ReadLine());
-    listResults.Add(_control.Execute(_rover, inputPlateauSettings));
-    //}
-    //listResults.Add(message);
-}
-foreach(string output in listResults)
-    Console.WriteLine(output);
+var plateauInput = Console.ReadLine();
 
+if (!(plateauInput == "" || plateauInput == null))
+{
+    inputPlateauSettings.PlateauSettings(plateauInput);
+    for (int i = 0; i <= inputPlateauSettings.MaxRoversAllowed(); i++)
+    {
+        var _rover = new Rover(i + 1);
+
+        var input = Console.ReadLine();
+
+        if (input == "" || input == null) { break; }
+
+        string message = _rover.RoverSettings(input, inputPlateauSettings, _rover);
+
+        var setInput = Console.ReadLine();
+        if (setInput == "" || setInput == null)
+        {
+            message = "No command set for " + _rover.RoverName;
+        }
+        else
+        {
+            _control.SetCommands(setInput);
+        }
+        if (message == "Settings Applied Successfully")
+        {
+            listResults.Add(_control.Execute(_rover, inputPlateauSettings));
+        }
+        else
+        {
+            listResults.Add(message);
+        }
+    }
+    foreach (string output in listResults)
+        Console.WriteLine(output);
+}
 
 

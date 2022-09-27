@@ -14,7 +14,7 @@ namespace MarsRoverKataService
             Orientation = Direction.N;
             Location = new Coordinate() { X = 0, Y = 0 };
         }
-        public string RoverSettings(string initialpositionAndDirection, Plateau plateau)
+        public string RoverSettings(string initialpositionAndDirection, Plateau plateau, Rover _rover)
         {
             string[] Settings = initialpositionAndDirection.Split(" ");
             if (initialpositionAndDirection.Length == 0) 
@@ -36,6 +36,8 @@ namespace MarsRoverKataService
             {
                 Orientation = Direction.W; 
             }
+            if (Settings[2] != "N" && Settings[2] != "S" && Settings[2] != "E" && Settings[2] != "W")
+                return "Setting of Rover aborted due to inaccurate Orientation setting";
             string x = Settings[0];
             string y = Settings[1];
             if (int.TryParse(x, out int Xcoord) && int.TryParse(y, out int Ycoord))
@@ -47,12 +49,12 @@ namespace MarsRoverKataService
                 Location = new Coordinate() { X = Xcoord, Y = Ycoord };
                 if (!plateau.IsCoordinateWithin(Location))
                 {
-                    return "Setting of Rover aborted because outside Plateau Area";
+                    return "Setting of "+ _rover.RoverName+" aborted because outside Plateau Area";
 
                 }
                 return "Settings Applied Successfully";
             }
-            return "Setting of Rover aborted due to inaccurate Co-ords";
+            return "Setting of "+ _rover.RoverName+" aborted due to inaccurate Co-ords";
         }
 
         public Coordinate MoveForward()
