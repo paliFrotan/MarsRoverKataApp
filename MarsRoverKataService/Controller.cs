@@ -81,7 +81,7 @@ namespace MarsRoverKataService
                 return result;
             }
             if (message == messageOutsideArea)
-                return messageOutsideArea + " @(" + _finalLocation.X + "," + _finalLocation.Y + "), Facing Direction " + _finalOrientation;
+                return messageOutsideArea + " @(" + _rover1.Location.X+ ", "+ _rover1.Location.Y + "), Facing Direction " + _finalOrientation;
             return messageCollision+" @("+_finalLocation.X+","+_finalLocation.Y+"), Facing Direction "+_finalOrientation;
         }
     }
