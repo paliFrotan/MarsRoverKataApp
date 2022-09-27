@@ -27,10 +27,13 @@ for (int i = 0; i <= inputPlateauSettings.MaxRoversAllowed(); i++)
     
     if (input == "") { break; }
     
-    
-    _rover.RoverSettings(input);
+    string message =_rover.RoverSettings(input,inputPlateauSettings);
+    //if (message == "Settings Applied Successfully") 
+    //{
     _control.SetCommands(Console.ReadLine());
-    listResults.Add(_control.Execute(_rover));
+    listResults.Add(_control.Execute(_rover, inputPlateauSettings));
+    //}
+    //listResults.Add(message);
 }
 foreach(string output in listResults)
     Console.WriteLine(output);

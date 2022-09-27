@@ -149,38 +149,39 @@ public class Tests
     [Test]
     public void IsRoverSettingWithinPlateau()
     {
-        _rover.RoverSettings("1 2 N");
-        var _location = _rover.Location;
         _sizePlateau.PlateauSettings("5 5");
+        _rover.RoverSettings("1 2 N",_sizePlateau);
+        var _location = _rover.Location;
+        
         _sizePlateau.IsCoordinateWithin(_location).Should().Be(true);
     }
     [Test]
     public void RoverCommandsSet()
     {
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E");
+        _rover.RoverSettings("3 3 E",_sizePlateau);
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover).Should().Be("4 4 E");
+        _commands.Execute(_rover,_sizePlateau).Should().Be("4 4 E");
     }
     [Test]
     public void RoverCommandsSetRoverLeft()
     {
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E");
+        _rover.RoverSettings("3 3 E",_sizePlateau);
         _commands.SetCommands("L");
-        _commands.Execute(_rover).Should().Be("3 3 N");
+        _commands.Execute(_rover,_sizePlateau).Should().Be("3 3 N");
     }
     [Test]
     public void RoverCommandsCollision()
     {
         var _rover1 = new Rover(1);
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E");
+        _rover.RoverSettings("3 3 E",_sizePlateau);
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover).Should().Be("4 4 E");
-        _rover1.RoverSettings("3 3 E");
+        _commands.Execute(_rover,_sizePlateau).Should().Be("4 4 E");
+        _rover1.RoverSettings("3 3 E", _sizePlateau);
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover1).Should().Be("Move aborted for RoverModel1 @(4,3), Facing Direction N");
+        _commands.Execute(_rover1,_sizePlateau).Should().Be("Move aborted for RoverModel1 @(4,3), Facing Direction N");
     }
     [Test]
     public void RoverCommandsNoCollision()
@@ -188,15 +189,15 @@ public class Tests
         var _rover1 = new Rover(1);
         var _rover2 = new Rover(2);
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E");
+        _rover.RoverSettings("3 3 E", _sizePlateau);
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover).Should().Be("4 4 E");
-        _rover1.RoverSettings("4 4 E");
+        _commands.Execute(_rover,_sizePlateau).Should().Be("4 4 E");
+        _rover1.RoverSettings("4 4 E",_sizePlateau);
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover1).Should().Be("5 5 E");
-        _rover2.RoverSettings("0 0 E");
+        _commands.Execute(_rover1,_sizePlateau).Should().Be("5 5 E");
+        _rover2.RoverSettings("0 0 E", _sizePlateau);
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover2).Should().Be("1 1 E");
+        _commands.Execute(_rover2,_sizePlateau).Should().Be("1 1 E");
     }
     [Test]
     public void RoverCommandsCollisionAndContinue()
@@ -204,14 +205,14 @@ public class Tests
         var _rover1 = new Rover(1);
         var _rover2 = new Rover(2);
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E");
+        _rover.RoverSettings("3 3 E", _sizePlateau);
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover).Should().Be("4 4 E");
-        _rover1.RoverSettings("3 3 E");
+        _commands.Execute(_rover,_sizePlateau).Should().Be("4 4 E");
+        _rover1.RoverSettings("3 3 E", _sizePlateau);
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover1).Should().Be("Move aborted for RoverModel1 @(4,3), Facing Direction N");
-        _rover2.RoverSettings("0 0 E");
+        _commands.Execute(_rover1,_sizePlateau).Should().Be("Move aborted for RoverModel1 @(4,3), Facing Direction N");
+        _rover2.RoverSettings("0 0 E", _sizePlateau);
         _commands.SetCommands("MLMR");
-        _commands.Execute(_rover2).Should().Be("1 1 E");
+        _commands.Execute(_rover2,_sizePlateau).Should().Be("1 1 E");
     }
 }

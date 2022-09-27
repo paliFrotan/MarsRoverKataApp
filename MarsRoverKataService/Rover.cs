@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MarsRoverKataService
 {
     public class Rover
@@ -20,7 +14,7 @@ namespace MarsRoverKataService
             Orientation = Direction.N;
             Location = new Coordinate() { X = 0, Y = 0 };
         }
-        public string RoverSettings(string initialpositionAndDirection)
+        public string RoverSettings(string initialpositionAndDirection, Plateau plateau)
         {
             string[] Settings = initialpositionAndDirection.Split(" ");
             if (initialpositionAndDirection.Length == 0) 
@@ -42,8 +36,15 @@ namespace MarsRoverKataService
             {
                 Orientation = Direction.W; 
             }
+            
             Location = new Coordinate() { X = int.Parse(Settings[0]), Y = int.Parse(Settings[1]) };
-            return "C";
+            if (!plateau.IsCoordinateWithin(Location))
+            {
+                return "Setting of Rover aborted because outside Plateau Area";
+
+            }
+            return "Settings Applied Successfully";
+             
         }
 
         public Coordinate MoveForward()

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
+﻿
 namespace MarsRoverKataService
 {
     public class Controller
@@ -36,20 +28,26 @@ namespace MarsRoverKataService
         public List<Coordinate> CollisionPoints = new();
         public List<string> RoverNames = new();
 
-        public string Execute(Rover _rover1)
+        public string Execute(Rover _rover1,Plateau _plateau)
         {
             var _finalOrientation = new Direction();
             var _finalLocation = new Coordinate();
             var _collisions = new Collisions();
+            //var _plateau = new Plateau();
             string message = "Successfully moved";
             string messageCollision = "Successfully moved";
+            string messageOutsideArea = "Move has been aborted because outside Plateau Area";
             string result = string.Empty;
             for (int i = 0; i < CommandList.Count; i++)
             {
                 if (CommandList[i] == Command.M)
                 {
                     var _possibleMove = _rover1.MoveForward();
-                       
+                    if (!_plateau.IsCoordinateWithin(_possibleMove))
+                    {
+                        message = messageOutsideArea;
+                        break;
+                    }
                     messageCollision =_collisions.CollisionsCheck(_possibleMove,CollisionPoints,RoverNames,_rover1);
                     if (message != messageCollision)
                     {
@@ -82,10 +80,9 @@ namespace MarsRoverKataService
                 result += _finalOrientation.ToString();
                 return result;
             }
-            else 
-            {
-                return messageCollision+" @("+_finalLocation.X+","+_finalLocation.Y+"), Facing Direction "+_finalOrientation;
-            }
+            if (message == messageOutsideArea)
+                return messageOutsideArea + " @(" + _finalLocation.X + "," + _finalLocation.Y + "), Facing Direction " + _finalOrientation;
+            return messageCollision+" @("+_finalLocation.X+","+_finalLocation.Y+"), Facing Direction "+_finalOrientation;
         }
     }
 }

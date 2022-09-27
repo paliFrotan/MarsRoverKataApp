@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
-
+﻿
 namespace MarsRoverKataService
 {
     public class Plateau
     {
         public int MaxX { get; set; }
         public int MaxY { get; set; }
-        private List<int> sizePlateau = new ();
+        private readonly List<int> sizePlateau = new ();
 
         public Plateau() { }
         public void PlateauSettings(string PlateauSizeInput) 
