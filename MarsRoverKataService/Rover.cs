@@ -20,19 +20,19 @@ namespace MarsRoverKataService
             if (initialpositionAndDirection.Length == 0) 
             { // throwexception
             };
-            if (Settings[2] == "N")
+            if (Settings[2] == "N"  )
             {
                 Orientation = Direction.N;
             }
-            if (Settings[2] == "S")
+            if (Settings[2] == "S"  )
             {
                 Orientation = Direction.S;
             }
-            if (Settings[2] == "E")
+            if (Settings[2] == "E"  )
             {
                 Orientation = Direction.E;
             }
-            if (Settings[2] == "W")
+            if (Settings[2] == "W"  )
             {
                 Orientation = Direction.W; 
             }

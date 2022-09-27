@@ -7,13 +7,6 @@
       <FileName>Controller.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MarsRoverKataService.Plateau">
-    <Position X="9.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>MAAAAAAAAAAAAAAAAAAAAAIAQAAAAAgAAAAAAAAAABA=</HashCode>
-      <FileName>Plateau.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MarsRoverKataService.Rover">
     <Position X="7.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
@@ -22,10 +15,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MarsRoverKataService.Collisions">
-    <Position X="5.25" Y="3.25" Width="1.5" />
+    <Position X="11" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Collisions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MarsRoverKataService.Plateau">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAAAAAAAAAAAAAAAAAAAAAIAQAAAAAgAAAAAAAAAABA=</HashCode>
+      <FileName>Plateau.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="MarsRoverKataService.Command">

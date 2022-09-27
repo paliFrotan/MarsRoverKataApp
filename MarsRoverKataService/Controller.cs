@@ -16,11 +16,11 @@ namespace MarsRoverKataService
             char[] commands = Commands.ToCharArray();
             foreach (char character in commands)
             {
-                if (character == 'L')
+                if (character == 'L' || character == 'l')
                     CommandList.Add(Command.L);
-                if (character == 'R')
+                if (character == 'R' || character == 'r')
                     CommandList.Add(Command.R);
-                if (character == 'M')
+                if (character == 'M' || character == 'm')
                     CommandList.Add(Command.M);
             }
         }
@@ -48,7 +48,7 @@ namespace MarsRoverKataService
                         message = messageOutsideArea;
                         break;
                     }
-                    messageCollision =_collisions.CollisionsCheck(_possibleMove,CollisionPoints,RoverNames,_rover1);
+                    messageCollision =_collisions.CollisionsCheck(_possibleMove,CollisionPoints,RoverNames);
                     if (message != messageCollision)
                     {
                         break;
@@ -81,7 +81,7 @@ namespace MarsRoverKataService
                 return result;
             }
             if (message == messageOutsideArea)
-                return _rover1.RoverName+ ": " +messageOutsideArea + " @(" + _rover1.Location.X+ ", "+ _rover1.Location.Y + "), Facing Direction " + _finalOrientation;
+                return _rover1.RoverName+ ": " +messageOutsideArea + " @(" + _finalLocation.X+ ", "+ _finalLocation.Y + "), Facing Direction " + _finalOrientation;
             return _rover1.RoverName+ ": "+messageCollision+" @("+_finalLocation.X+","+_finalLocation.Y+"), Facing Direction "+_finalOrientation;
         }
     }

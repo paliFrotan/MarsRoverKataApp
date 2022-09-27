@@ -18,15 +18,15 @@ namespace MarsRoverKataService
                 
                 if (maxx <= 1 || maxy <= 1)
                 {
-                    MaxX = 5;
-                    MaxY = 5;
+                    MaxX = 6;
+                    MaxY = 6;
                 }
                 MaxY = maxy;
                 MaxX = maxx;
 
             }
-            MaxX = 5;
-            MaxY = 5;
+            MaxX = 6;
+            MaxY = 6;
         }
         public bool IsCoordinateWithin(Coordinate _location)
         {
