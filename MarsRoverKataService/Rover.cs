@@ -36,15 +36,23 @@ namespace MarsRoverKataService
             {
                 Orientation = Direction.W; 
             }
-            
-            Location = new Coordinate() { X = int.Parse(Settings[0]), Y = int.Parse(Settings[1]) };
-            if (!plateau.IsCoordinateWithin(Location))
+            string x = Settings[0];
+            string y = Settings[1];
+            if (int.TryParse(x, out int Xcoord) && int.TryParse(y, out int Ycoord))
             {
-                return "Setting of Rover aborted because outside Plateau Area";
+                if (Xcoord < 0)
+                    Settings[0] = "0";
+                if (Ycoord < 0)
+                    Settings[1] = "0";
+                Location = new Coordinate() { X = Xcoord, Y = Ycoord };
+                if (!plateau.IsCoordinateWithin(Location))
+                {
+                    return "Setting of Rover aborted because outside Plateau Area";
 
+                }
+                return "Settings Applied Successfully";
             }
-            return "Settings Applied Successfully";
-             
+            return "Setting of Rover aborted due to inaccurate Co-ords";
         }
 
         public Coordinate MoveForward()

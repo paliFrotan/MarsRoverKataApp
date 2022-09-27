@@ -18,13 +18,8 @@ Console.WriteLine("Press Enter when completed all Rover Commands");
 List<string> listResults = new List<string>();
 var inputPlateauSettings = new Plateau();
 var _control = new Controller();
-int gridSize;
-while (!int.TryParse(Console.ReadLine(), out gridSize))
-{
-    Console.WriteLine("That was invalid. Enter a valid Grid Size.");
-}
-string gridToString = gridSize.ToString();
-inputPlateauSettings.PlateauSettings(gridToString);
+
+inputPlateauSettings.PlateauSettings(Console.ReadLine());
 for (int i = 0; i <= inputPlateauSettings.MaxRoversAllowed(); i++)
 {
     var _rover = new Rover(i+1);
