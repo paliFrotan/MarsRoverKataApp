@@ -11,10 +11,16 @@ namespace MarsRoverKataService
         public void PlateauSettings(string PlateauSizeInput) 
         {
             string[] PlateauSizeList = PlateauSizeInput.Split(" ");
+            
             for (int i = 0; i < PlateauSizeList.Length; i++)
                 sizePlateau.Add(Convert.ToInt32(PlateauSizeList[i]) + 1);
             MaxX = sizePlateau[0];
             MaxY = sizePlateau[1];
+            if (MaxX <= 1 || MaxY <= 1)
+            {
+                MaxX = 5;
+                MaxY = 5;
+            }
         }
         public bool IsCoordinateWithin(Coordinate _location)
         {
