@@ -46,7 +46,7 @@ namespace MarsRoverKataService
                         message = messageOutsideArea;
                         break;
                     }
-                    messageCollision =_collisions.CollisionsCheck(_possibleMove,CollisionPoints,RoverNames);
+                    messageCollision =_collisions.CollisionsCheck(_possibleMove,CollisionPoints);
                     if (message != messageCollision)
                     {
                         break;

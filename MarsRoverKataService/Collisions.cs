@@ -2,7 +2,7 @@
 {
     public class Collisions
     {
-        public string CollisionsCheck(Coordinate possibleMove, List<Coordinate> CollisionPoints, List<string> RoverNames)
+        public string CollisionsCheck(Coordinate possibleMove, List<Coordinate> CollisionPoints)
         {
             foreach (Coordinate CollisionPossible in CollisionPoints)
             {
