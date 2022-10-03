@@ -139,7 +139,6 @@ public class Tests
     [Test]
     public void InputReturnsSizeOfPlateau()
     {
-        
         var expectedMaxX = 6;
         var expectedMaxY = 6;
         _sizePlateau.PlateauSettings("5 5");
@@ -150,16 +149,15 @@ public class Tests
     public void IsRoverSettingWithinPlateau()
     {
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("1 2 N",_sizePlateau, _rover);
+        _rover.RoverSettings("1 2 N",_sizePlateau);
         var _location = _rover.Location;
-        
         _sizePlateau.IsCoordinateWithin(_location).Should().Be(true);
     }
     [Test]
     public void RoverCommandsSet()
     {
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E",_sizePlateau, _rover);
+        _rover.RoverSettings("3 3 E",_sizePlateau);
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover,_sizePlateau).Should().Be("4 4 E");
     }
@@ -167,7 +165,7 @@ public class Tests
     public void RoverCommandsSetRoverLeft()
     {
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E",_sizePlateau, _rover);
+        _rover.RoverSettings("3 3 E",_sizePlateau);
         _commands.SetCommands("L");
         _commands.Execute(_rover,_sizePlateau).Should().Be("3 3 N");
     }
@@ -176,10 +174,10 @@ public class Tests
     {
         var _rover1 = new Rover(1);
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E",_sizePlateau, _rover);
+        _rover.RoverSettings("3 3 E",_sizePlateau);
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover,_sizePlateau).Should().Be("4 4 E");
-        _rover1.RoverSettings("3 3 E", _sizePlateau, _rover1);
+        _rover1.RoverSettings("3 3 E", _sizePlateau);
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover1,_sizePlateau).Should().Be("RoverModel1: Move aborted for rover @(4,3), Facing Direction N");
     }
@@ -189,13 +187,13 @@ public class Tests
         var _rover1 = new Rover(1);
         var _rover2 = new Rover(2);
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E", _sizePlateau, _rover);
+        _rover.RoverSettings("3 3 E", _sizePlateau);
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover,_sizePlateau).Should().Be("4 4 E");
-        _rover1.RoverSettings("4 4 E",_sizePlateau, _rover1);
+        _rover1.RoverSettings("4 4 E",_sizePlateau);
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover1,_sizePlateau).Should().Be("5 5 E");
-        _rover2.RoverSettings("0 0 E", _sizePlateau,_rover2);
+        _rover2.RoverSettings("0 0 E", _sizePlateau);
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover2,_sizePlateau).Should().Be("1 1 E");
     }
@@ -205,13 +203,13 @@ public class Tests
         var _rover1 = new Rover(1);
         var _rover2 = new Rover(2);
         _sizePlateau.PlateauSettings("5 5");
-        _rover.RoverSettings("3 3 E", _sizePlateau, _rover);
+        _rover.RoverSettings("3 3 E", _sizePlateau);
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover,_sizePlateau).Should().Be("4 4 E");
-        _rover1.RoverSettings("3 3 E", _sizePlateau, _rover1);
+        _rover1.RoverSettings("3 3 E", _sizePlateau);
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover1,_sizePlateau).Should().Be("RoverModel1: Move aborted for rover @(4,3), Facing Direction N");
-        _rover2.RoverSettings("0 0 E", _sizePlateau, _rover2);
+        _rover2.RoverSettings("0 0 E", _sizePlateau);
         _commands.SetCommands("MLMR");
         _commands.Execute(_rover2,_sizePlateau).Should().Be("1 1 E");
     }

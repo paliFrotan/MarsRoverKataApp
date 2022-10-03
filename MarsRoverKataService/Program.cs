@@ -32,7 +32,7 @@ if (!(plateauInput == "" || plateauInput == null))
 
         if (input == "" || input == null) { break; }
 
-        string message = _rover.RoverSettings(input, inputPlateauSettings, _rover);
+        string message = _rover.RoverSettings(input, inputPlateauSettings);
 
         var setInput = Console.ReadLine();
         if (setInput == "" || setInput == null)

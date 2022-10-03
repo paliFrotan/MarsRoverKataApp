@@ -33,7 +33,6 @@ namespace MarsRoverKataService
             var _finalOrientation = new Direction();
             var _finalLocation = new Coordinate();
             var _collisions = new Collisions();
-            //var _plateau = new Plateau();
             string message = "Successfully moved";
             string messageCollision = "Successfully moved";
             string messageOutsideArea = "Move has been aborted because outside Plateau Area";

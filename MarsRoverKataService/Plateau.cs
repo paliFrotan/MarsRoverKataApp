@@ -5,8 +5,6 @@ namespace MarsRoverKataService
     {
         public int MaxX { get; set; }
         public int MaxY { get; set; }
-        private readonly List<int> sizePlateau = new ();
-
         public Plateau() { }
         public void PlateauSettings(string PlateauSizeInput) 
         {
@@ -28,6 +26,7 @@ namespace MarsRoverKataService
             MaxX = 6;
             MaxY = 6;
         }
+
         public bool IsCoordinateWithin(Coordinate _location)
         {
             var x = int.Parse(_location.X.ToString());
