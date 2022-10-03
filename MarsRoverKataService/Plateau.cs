@@ -9,6 +9,7 @@ namespace MarsRoverKataService
         public void PlateauSettings(string PlateauSizeInput) 
         {
             string[] PlateauSizeList = PlateauSizeInput.Split(" ");
+            // length should be two
             string x = PlateauSizeList[0];
             string y = PlateauSizeList[1];
             if (int.TryParse(x, out int maxx) && int.TryParse(y, out int maxy))
@@ -31,7 +32,7 @@ namespace MarsRoverKataService
         {
             var x = int.Parse(_location.X.ToString());
             var y = int.Parse(_location.Y.ToString());
-            return (x < MaxX && x > -1 && y < MaxY && y > -1);
+            return (x <= MaxX && x > -1 && y <= MaxY && y > -1);
             
         }
         public int MaxRoversAllowed()

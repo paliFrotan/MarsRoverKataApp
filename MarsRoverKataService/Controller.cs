@@ -26,7 +26,6 @@ namespace MarsRoverKataService
         }
 
         public List<Coordinate> CollisionPoints = new();
-        public List<string> RoverNames = new();
 
         public string Execute(Rover _rover1,Plateau _plateau)
         {
@@ -69,7 +68,6 @@ namespace MarsRoverKataService
 
             }
             CollisionPoints.Add(_finalLocation);
-            RoverNames.Add(_rover1.RoverName);
             if (message == messageCollision)
             {
                 result += _finalLocation.X.ToString();
